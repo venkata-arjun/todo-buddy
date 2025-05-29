@@ -96,7 +96,7 @@ ul {
 ul li {
     list-style: none;
     font-size: 1.1rem;
-    padding: 14px 8px 14px 54px;
+    padding: 14px 8px 14px 44px; /* less left padding, icon is smaller than image */
     user-select: none;
     position: relative;
     cursor: pointer;
@@ -105,25 +105,23 @@ ul li {
     transition: background 0.2s, color 0.2s;
     background: #f8f9fd;
     box-shadow: 0 1px 4px rgba(80, 80, 160, 0.04);
+    display: flex;
+    align-items: center;
 }
 
 ul li:hover {
     background: #e6e8f3;
 }
 
-ul li::before {
-    content: '';
+ul li i {
     position: absolute;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    background-image: url(unchecked.png);
-    background-size: cover;
-    background-position: center;
-    top: 14px;
     left: 12px;
-    box-shadow: 0 1px 4px rgba(80, 80, 160, 0.08);
-    transition: background-image 0.2s;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3em;
+    color: #4360aa;
+    transition: color 0.2s;
+    pointer-events: none; /* icon doesn't block clicks */
 }
 
 ul li.checked {
@@ -132,8 +130,8 @@ ul li.checked {
     background: #f0f1f7;
 }
 
-ul li.checked::before {
-    background-image: url(checked.png);
+ul li.checked i {
+    color: #4e085f;
 }
 
 ul li span {
@@ -154,4 +152,10 @@ ul li span {
 ul li span:hover {
     background: #e0e2ed;
     color: #e74c3c;
+}
+
+/* Remove old ::before pseudo-element for check images */
+ul li::before,
+ul li.checked::before {
+    content: none;
 }
